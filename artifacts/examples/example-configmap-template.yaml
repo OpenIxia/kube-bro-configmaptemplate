@@ -1,0 +1,26 @@
+apiVersion: cmt.keysight.io/v1alpha1
+kind: ConfigMapTemplate
+metadata:
+  name: example-configmap-template
+configMapName: example-configmap-from-template
+data:
+  foo: "Testing: {{ .Name }}"
+  cluster-layout: |
+    redef Cluster::manager_is_logger = F;
+    redef Cluster::nodes = {
+      {{ range pods "app=foo,component=control" }}
+        ["control"] = [$node_type=Cluster::CONTROL, $ip={{- .Status.PodIP -}}, $zone_id="", $p=47760/tcp],
+      {{end}}
+      {{ range pods "app=foo,component=logger" }}
+        ["logger"] = [$node_type=Cluster::LOGGER, $ip={{- .Status.PodIP -}}, $zone_id="", $p=47761/tcp],
+      {{end}}
+      {{ range pods "app=foo,component=manager" }}
+        ["manager"] = [$node_type=Cluster::MANAGER, $ip={{- .Status.PodIP -}}, $zone_id="", $p=47762/tcp, $logger="logger", $workers=set("worker-1")],
+      {{end}}
+      {{ range $i, $a := pods "app=foo,component=proxy" }}
+        ["proxy-{{- $i -}}"] = [$node_type=Cluster::PROXY, $ip={{- .Status.PodIP -}}, $zone_id="", $p=47763/tcp, $logger="logger", $manager="manager", $workers=set("worker-0")],
+      {{end}}
+      {{ range $i, $a := pods "app=foo,component=worker" }}
+        ["worker-{{- $i -}}"] = [$node_type=Cluster::WORKER, $ip={{- .Status.PodIP -}}, $zone_id="", $p=47764/tcp, $interface="eth0", $logger="logger", $manager="manager", $proxy="proxy-0"],
+      {{end}}
+    };

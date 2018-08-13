@@ -1,0 +1,48 @@
+stages:
+- unit_test
+- build
+- integration_test
+- accept_dependency
+- binaries
+- trigger
+
+variables:
+  DOCKER_IN_DOCKER: docker:18.05.0-ce-dind
+
+build image:
+  stage: build
+  image: docker:stable-git
+  tags:
+    - docker
+  services:
+  - name: $DOCKER_IN_DOCKER
+    command: ["dockerd-entrypoint.sh", "--mtu=1300"]
+  variables:
+    DOCKER_DRIVER: overlay2
+    DOCKER_HOST: tcp://localhost:2375
+  script:
+    - apk add --update alpine-sdk
+    - echo $ARTIFACTORY_PASSWORD | docker login -u $ARTIFACTORY_USER --password-stdin ksnetservices-docker.jfrog.io
+    - echo $(git describe) > version.txt
+    - docker build -t cmt-controller .
+    - docker tag cmt-controller ksnetservices-docker.jfrog.io/cmt-controller
+    - docker tag cmt-controller ksnetservices-docker.jfrog.io/cmt-controller:$(cat version.txt)
+    - docker push ksnetservices-docker.jfrog.io/cmt-controller:$(cat version.txt)
+    # For non-dev builds, push to 'latest'
+    - if ! grep -- - version.txt > /dev/null; then docker push ksnetservices-docker.jfrog.io/cmt-controller; fi
+  except:
+    - pipelines
+
+unit test:
+  stage: unit_test
+  image: golang:alpine
+  before_script:
+    - mkdir -p /go/src/keysight.io
+    - ln -s $PWD /go/src/keysight.io/cmt-controller
+    - cd /go/src/keysight.io/cmt-controller
+  script:
+    - apk add --update git
+    - go get -d -v ./...
+    - go test -v *.go
+  except:
+    - pipelines

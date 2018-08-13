@@ -1,0 +1,114 @@
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  name: configmaptemplates.cmt.keysight.io
+  labels:
+    app: configmap-template-controller
+spec:
+  group: cmt.keysight.io
+  version: v1alpha1
+  names:
+    kind: ConfigMapTemplate
+    plural: configmaptemplates
+  scope: Namespaced
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cmt-controller
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app: configmap-template-controller
+  name: cmt-config-watcher
+  namespace: cmt-controller
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - delete
+  - patch
+- apiGroups:
+  - ""
+  resources:
+  - events
+  verbs:
+  - get
+  - list
+  - create
+  - patch
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - "cmt.keysight.io"
+  resources:
+  - configmaptemplates
+  verbs:
+  - get
+  - list
+  - watch
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: 2018-05-21T18:48:29Z
+  labels:
+    app: configmap-template-controller
+  name: configmap-template-controller
+  namespace: cmt-controller
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    app: configmap-template-controller
+  name: cmt-config-watcher
+  namespace: cmt-controller
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cmt-config-watcher
+subjects:
+- kind: ServiceAccount
+  name: configmap-template-controller
+  namespace: cmt-controller
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  namespace: cmt-controller
+  name: configmap-template-controller
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: configmap-template-controller
+  template:
+    metadata:
+      labels:
+        app: configmap-template-controller
+    spec:
+      containers:
+        - name: controller
+          image: ixiacom/cmt-controller:0.2.0
+          args:
+            - "-stderrthreshold"
+            - info
+      serviceAccount: configmap-template-controller
+      imagePullSecrets:
+        - name: artifactory-docker-secret
