@@ -451,12 +451,14 @@ func (c *Controller) newConfigMap(configMapTemplate *cmtv1alpha1.ConfigMapTempla
 		t, err := template.New(k).Funcs(funcMap).Parse(v)
 		if err != nil {
 			runtime.HandleError(fmt.Errorf("error parsing template definition: " + err.Error()))
+			continue;
 		}
 
 		var tpl bytes.Buffer
 		err = t.Execute(&tpl, configMapTemplate)
 		if err != nil {
 			runtime.HandleError(fmt.Errorf("error instantiating template: " + err.Error()))
+			continue;
 		}
 
 		ret.Data[k] = tpl.String()
