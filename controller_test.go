@@ -88,14 +88,14 @@ func (f *fixture) newController() (*Controller, informers.SharedInformerFactory,
 	k8sI := kubeinformers.NewSharedInformerFactory(f.kubeclient, noResyncPeriodFunc())
 
 	c := NewController(f.kubeclient, f.client,
-		k8sI.Core().V1().ConfigMaps(), k8sI.Core().V1().Pods(), i.cmt().V1alpha1().ConfigMapTemplates())
+		k8sI.Core().V1().ConfigMaps(), k8sI.Core().V1().Pods(), i.CMT().V1alpha1().ConfigMapTemplates())
 
 	c.configMapTemplatesSynced = alwaysReady
 	c.configMapsSynced = alwaysReady
 	c.recorder = &record.FakeRecorder{}
 
 	for _, f := range f.configMapTemplateLister {
-		i.cmt().V1alpha1().ConfigMapTemplates().Informer().GetIndexer().Add(f)
+		i.CMT().V1alpha1().ConfigMapTemplates().Informer().GetIndexer().Add(f)
 	}
 
 	for _, d := range f.configMapLister {

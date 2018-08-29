@@ -105,7 +105,7 @@ spec:
     spec:
       containers:
         - name: controller
-          image: ixiacom/cmt-controller:0.2.0
+          image: ixiacom/cmt-controller:0.2.1
           args:
             - "-stderrthreshold"
             - info
