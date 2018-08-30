@@ -1,5 +1,5 @@
 /*
-Copyright The Kubernetes Authors.
+Copyright 2018 Keysight Technologies
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -19,12 +19,12 @@ limitations under the License.
 package v1alpha1
 
 import (
+	v1alpha1 "github.com/openixia/cmt-controller/pkg/apis/cmt/v1alpha1"
+	scheme "github.com/openixia/cmt-controller/pkg/client/clientset/versioned/scheme"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"
 	rest "k8s.io/client-go/rest"
-	v1alpha1 "keysight.io/cmt-controller/pkg/apis/cmt/v1alpha1"
-	scheme "keysight.io/cmt-controller/pkg/client/clientset/versioned/scheme"
 )
 
 // ConfigMapTemplatesGetter has a method to return a ConfigMapTemplateInterface.
@@ -53,7 +53,7 @@ type configMapTemplates struct {
 }
 
 // newConfigMapTemplates returns a ConfigMapTemplates
-func newConfigMapTemplates(c *CMTV1alpha1Client, namespace string) *configMapTemplates {
+func newConfigMapTemplates(c *CmtV1alpha1Client, namespace string) *configMapTemplates {
 	return &configMapTemplates{
 		client: c.RESTClient(),
 		ns:     namespace,

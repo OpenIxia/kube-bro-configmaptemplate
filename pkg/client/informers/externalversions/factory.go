@@ -1,5 +1,5 @@
 /*
-Copyright The Kubernetes Authors.
+Copyright 2018 Keysight Technologies
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -23,13 +23,13 @@ import (
 	sync "sync"
 	time "time"
 
+	versioned "github.com/openixia/cmt-controller/pkg/client/clientset/versioned"
+	cmt "github.com/openixia/cmt-controller/pkg/client/informers/externalversions/cmt"
+	internalinterfaces "github.com/openixia/cmt-controller/pkg/client/informers/externalversions/internalinterfaces"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	cache "k8s.io/client-go/tools/cache"
-	versioned "keysight.io/cmt-controller/pkg/client/clientset/versioned"
-	internalinterfaces "keysight.io/cmt-controller/pkg/client/informers/externalversions/internalinterfaces"
-	cmt "keysight.io/cmt-controller/pkg/client/informers/externalversions/cmt"
 )
 
 // SharedInformerOption defines the functional option type for SharedInformerFactory.
@@ -172,9 +172,9 @@ type SharedInformerFactory interface {
 	ForResource(resource schema.GroupVersionResource) (GenericInformer, error)
 	WaitForCacheSync(stopCh <-chan struct{}) map[reflect.Type]bool
 
-	CMT() cmt.Interface
+	Cmt() cmt.Interface
 }
 
-func (f *sharedInformerFactory) CMT() cmt.Interface {
+func (f *sharedInformerFactory) Cmt() cmt.Interface {
 	return cmt.New(f, f.namespace, f.tweakListOptions)
 }

@@ -37,9 +37,9 @@ unit test:
   stage: unit_test
   image: golang:alpine
   before_script:
-    - mkdir -p /go/src/keysight.io
-    - ln -s $PWD /go/src/keysight.io/cmt-controller
-    - cd /go/src/keysight.io/cmt-controller
+    - mkdir -p /go/src/github.com/openixia
+    - ln -s $PWD /go/src/github.com/openixia/cmt-controller
+    - cd /go/src/github.com/openixia/cmt-controller
   script:
     - apk add --update git
     - go get -d -v ./...

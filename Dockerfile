@@ -1,7 +1,7 @@
 FROM golang:alpine
 MAINTAINER Ixia NetServices
 
-WORKDIR /go/src/keysight.io/cmt-controller
+WORKDIR /go/src/github.com/openixia/cmt-controller
 
 COPY . .
 

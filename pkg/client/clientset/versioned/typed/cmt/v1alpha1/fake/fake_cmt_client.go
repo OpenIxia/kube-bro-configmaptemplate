@@ -1,5 +1,5 @@
 /*
-Copyright The Kubernetes Authors.
+Copyright 2018 Keysight Technologies
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -19,22 +19,22 @@ limitations under the License.
 package fake
 
 import (
+	v1alpha1 "github.com/openixia/cmt-controller/pkg/client/clientset/versioned/typed/cmt/v1alpha1"
 	rest "k8s.io/client-go/rest"
 	testing "k8s.io/client-go/testing"
-	v1alpha1 "keysight.io/cmt-controller/pkg/client/clientset/versioned/typed/cmt/v1alpha1"
 )
 
-type FakeCMTV1alpha1 struct {
+type FakeCmtV1alpha1 struct {
 	*testing.Fake
 }
 
-func (c *FakeCMTV1alpha1) ConfigMapTemplates(namespace string) v1alpha1.ConfigMapTemplateInterface {
+func (c *FakeCmtV1alpha1) ConfigMapTemplates(namespace string) v1alpha1.ConfigMapTemplateInterface {
 	return &FakeConfigMapTemplates{c, namespace}
 }
 
 // RESTClient returns a RESTClient that is used to communicate
 // with API server by this client implementation.
-func (c *FakeCMTV1alpha1) RESTClient() rest.Interface {
+func (c *FakeCmtV1alpha1) RESTClient() rest.Interface {
 	var ret *rest.RESTClient
 	return ret
 }

@@ -1,5 +1,5 @@
 /*
-Copyright The Kubernetes Authors.
+Copyright 2018 Keysight Technologies
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -19,34 +19,34 @@ limitations under the License.
 package versioned
 
 import (
+	cmtv1alpha1 "github.com/openixia/cmt-controller/pkg/client/clientset/versioned/typed/cmt/v1alpha1"
 	discovery "k8s.io/client-go/discovery"
 	rest "k8s.io/client-go/rest"
 	flowcontrol "k8s.io/client-go/util/flowcontrol"
-	cmtv1alpha1 "keysight.io/cmt-controller/pkg/client/clientset/versioned/typed/cmt/v1alpha1"
 )
 
 type Interface interface {
 	Discovery() discovery.DiscoveryInterface
-	CMTV1alpha1() cmtv1alpha1.CMTV1alpha1Interface
+	CmtV1alpha1() cmtv1alpha1.CmtV1alpha1Interface
 	// Deprecated: please explicitly pick a version if possible.
-	CMT() cmtv1alpha1.CMTV1alpha1Interface
+	Cmt() cmtv1alpha1.CmtV1alpha1Interface
 }
 
 // Clientset contains the clients for groups. Each group has exactly one
 // version included in a Clientset.
 type Clientset struct {
 	*discovery.DiscoveryClient
-	cmtV1alpha1 *cmtv1alpha1.CMTV1alpha1Client
+	cmtV1alpha1 *cmtv1alpha1.CmtV1alpha1Client
 }
 
-// CMTV1alpha1 retrieves the CMTV1alpha1Client
-func (c *Clientset) CMTV1alpha1() cmtv1alpha1.CMTV1alpha1Interface {
+// CmtV1alpha1 retrieves the CmtV1alpha1Client
+func (c *Clientset) CmtV1alpha1() cmtv1alpha1.CmtV1alpha1Interface {
 	return c.cmtV1alpha1
 }
 
-// Deprecated: CMT retrieves the default version of CMTClient.
+// Deprecated: Cmt retrieves the default version of CmtClient.
 // Please explicitly pick a version.
-func (c *Clientset) CMT() cmtv1alpha1.CMTV1alpha1Interface {
+func (c *Clientset) Cmt() cmtv1alpha1.CmtV1alpha1Interface {
 	return c.cmtV1alpha1
 }
 

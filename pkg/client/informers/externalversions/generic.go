@@ -1,5 +1,5 @@
 /*
-Copyright The Kubernetes Authors.
+Copyright 2018 Keysight Technologies
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -21,9 +21,9 @@ package externalversions
 import (
 	"fmt"
 
+	v1alpha1 "github.com/openixia/cmt-controller/pkg/apis/cmt/v1alpha1"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	cache "k8s.io/client-go/tools/cache"
-	v1alpha1 "keysight.io/cmt-controller/pkg/apis/cmt/v1alpha1"
 )
 
 // GenericInformer is type of SharedIndexInformer which will locate and delegate to other
@@ -54,7 +54,7 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 	switch resource {
 	// Group=cmt.k8s.io, Version=v1alpha1
 	case v1alpha1.SchemeGroupVersion.WithResource("configmaptemplates"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.CMT().V1alpha1().ConfigMapTemplates().Informer()}, nil
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Cmt().V1alpha1().ConfigMapTemplates().Informer()}, nil
 
 	}
 

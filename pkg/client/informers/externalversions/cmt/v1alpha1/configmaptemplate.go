@@ -1,5 +1,5 @@
 /*
-Copyright The Kubernetes Authors.
+Copyright 2018 Keysight Technologies
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -21,14 +21,14 @@ package v1alpha1
 import (
 	time "time"
 
+	cmt_v1alpha1 "github.com/openixia/cmt-controller/pkg/apis/cmt/v1alpha1"
+	versioned "github.com/openixia/cmt-controller/pkg/client/clientset/versioned"
+	internalinterfaces "github.com/openixia/cmt-controller/pkg/client/informers/externalversions/internalinterfaces"
+	v1alpha1 "github.com/openixia/cmt-controller/pkg/client/listers/cmt/v1alpha1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	watch "k8s.io/apimachinery/pkg/watch"
 	cache "k8s.io/client-go/tools/cache"
-	cmt_v1alpha1 "keysight.io/cmt-controller/pkg/apis/cmt/v1alpha1"
-	versioned "keysight.io/cmt-controller/pkg/client/clientset/versioned"
-	internalinterfaces "keysight.io/cmt-controller/pkg/client/informers/externalversions/internalinterfaces"
-	v1alpha1 "keysight.io/cmt-controller/pkg/client/listers/cmt/v1alpha1"
 )
 
 // ConfigMapTemplateInformer provides access to a shared informer and lister for
@@ -61,13 +61,13 @@ func NewFilteredConfigMapTemplateInformer(client versioned.Interface, namespace 
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.CMTV1alpha1().ConfigMapTemplates(namespace).List(options)
+				return client.CmtV1alpha1().ConfigMapTemplates(namespace).List(options)
 			},
 			WatchFunc: func(options v1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.CMTV1alpha1().ConfigMapTemplates(namespace).Watch(options)
+				return client.CmtV1alpha1().ConfigMapTemplates(namespace).Watch(options)
 			},
 		},
 		&cmt_v1alpha1.ConfigMapTemplate{},

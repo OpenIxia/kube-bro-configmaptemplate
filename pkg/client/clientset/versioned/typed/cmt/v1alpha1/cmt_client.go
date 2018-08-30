@@ -1,5 +1,5 @@
 /*
-Copyright The Kubernetes Authors.
+Copyright 2018 Keysight Technologies
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -19,29 +19,28 @@ limitations under the License.
 package v1alpha1
 
 import (
+	v1alpha1 "github.com/openixia/cmt-controller/pkg/apis/cmt/v1alpha1"
+	"github.com/openixia/cmt-controller/pkg/client/clientset/versioned/scheme"
 	serializer "k8s.io/apimachinery/pkg/runtime/serializer"
 	rest "k8s.io/client-go/rest"
-	v1alpha1 "keysight.io/cmt-controller/pkg/apis/cmt/v1alpha1"
-	"keysight.io/cmt-controller/pkg/client/clientset/versioned/scheme"
 )
 
-type CMTV1alpha1Interface interface {
+type CmtV1alpha1Interface interface {
 	RESTClient() rest.Interface
 	ConfigMapTemplatesGetter
 }
 
-// CMTV1alpha1Client is used to interact with features provided by the
-// cmt.k8s.io group.
-type CMTV1alpha1Client struct {
+// CmtV1alpha1Client is used to interact with features provided by the cmt.k8s.io group.
+type CmtV1alpha1Client struct {
 	restClient rest.Interface
 }
 
-func (c *CMTV1alpha1Client) ConfigMapTemplates(namespace string) ConfigMapTemplateInterface {
+func (c *CmtV1alpha1Client) ConfigMapTemplates(namespace string) ConfigMapTemplateInterface {
 	return newConfigMapTemplates(c, namespace)
 }
 
-// NewForConfig creates a new CMTV1alpha1Client for the given config.
-func NewForConfig(c *rest.Config) (*CMTV1alpha1Client, error) {
+// NewForConfig creates a new CmtV1alpha1Client for the given config.
+func NewForConfig(c *rest.Config) (*CmtV1alpha1Client, error) {
 	config := *c
 	if err := setConfigDefaults(&config); err != nil {
 		return nil, err
@@ -50,12 +49,12 @@ func NewForConfig(c *rest.Config) (*CMTV1alpha1Client, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &CMTV1alpha1Client{client}, nil
+	return &CmtV1alpha1Client{client}, nil
 }
 
-// NewForConfigOrDie creates a new CMTV1alpha1Client for the given config and
+// NewForConfigOrDie creates a new CmtV1alpha1Client for the given config and
 // panics if there is an error in the config.
-func NewForConfigOrDie(c *rest.Config) *CMTV1alpha1Client {
+func NewForConfigOrDie(c *rest.Config) *CmtV1alpha1Client {
 	client, err := NewForConfig(c)
 	if err != nil {
 		panic(err)
@@ -63,9 +62,9 @@ func NewForConfigOrDie(c *rest.Config) *CMTV1alpha1Client {
 	return client
 }
 
-// New creates a new CMTV1alpha1Client for the given RESTClient.
-func New(c rest.Interface) *CMTV1alpha1Client {
-	return &CMTV1alpha1Client{c}
+// New creates a new CmtV1alpha1Client for the given RESTClient.
+func New(c rest.Interface) *CmtV1alpha1Client {
+	return &CmtV1alpha1Client{c}
 }
 
 func setConfigDefaults(config *rest.Config) error {
@@ -83,7 +82,7 @@ func setConfigDefaults(config *rest.Config) error {
 
 // RESTClient returns a RESTClient that is used to communicate
 // with API server by this client implementation.
-func (c *CMTV1alpha1Client) RESTClient() rest.Interface {
+func (c *CmtV1alpha1Client) RESTClient() rest.Interface {
 	if c == nil {
 		return nil
 	}

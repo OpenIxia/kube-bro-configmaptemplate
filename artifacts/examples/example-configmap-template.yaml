@@ -1,4 +1,4 @@
-apiVersion: cmt.keysight.io/v1alpha1
+apiVersion: cmt.openixia.com/v1alpha1
 kind: ConfigMapTemplate
 metadata:
   name: example-configmap-template

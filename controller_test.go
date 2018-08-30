@@ -32,9 +32,9 @@ import (
 	"k8s.io/client-go/tools/cache"
 	"k8s.io/client-go/tools/record"
 
-	cmt "keysight.io/cmt-controller/pkg/apis/cmt/v1alpha1"
-	"keysight.io/cmt-controller/pkg/client/clientset/versioned/fake"
-	informers "keysight.io/cmt-controller/pkg/client/informers/externalversions"
+	cmt "github.com/openixia/cmt-controller/pkg/apis/cmt/v1alpha1"
+	"github.com/openixia/cmt-controller/pkg/client/clientset/versioned/fake"
+	informers "github.com/openixia/cmt-controller/pkg/client/informers/externalversions"
 )
 
 var (

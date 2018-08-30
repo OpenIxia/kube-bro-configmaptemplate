@@ -17,5 +17,5 @@ limitations under the License.
 package cmt
 
 const (
-	GroupName = "cmt.keysight.io"
+	GroupName = "cmt.openixia.com"
 )

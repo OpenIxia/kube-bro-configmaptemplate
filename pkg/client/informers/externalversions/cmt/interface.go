@@ -1,5 +1,5 @@
 /*
-Copyright The Kubernetes Authors.
+Copyright 2018 Keysight Technologies
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -19,8 +19,8 @@ limitations under the License.
 package cmt
 
 import (
-	internalinterfaces "keysight.io/cmt-controller/pkg/client/informers/externalversions/internalinterfaces"
-	v1alpha1 "keysight.io/cmt-controller/pkg/client/informers/externalversions/cmt/v1alpha1"
+	v1alpha1 "github.com/openixia/cmt-controller/pkg/client/informers/externalversions/cmt/v1alpha1"
+	internalinterfaces "github.com/openixia/cmt-controller/pkg/client/informers/externalversions/internalinterfaces"
 )
 
 // Interface provides access to each of this group's versions.

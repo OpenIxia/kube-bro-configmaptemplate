@@ -1,5 +1,5 @@
 /*
-Copyright The Kubernetes Authors.
+Copyright 2018 Keysight Technologies
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -19,14 +19,14 @@ limitations under the License.
 package fake
 
 import (
+	clientset "github.com/openixia/cmt-controller/pkg/client/clientset/versioned"
+	cmtv1alpha1 "github.com/openixia/cmt-controller/pkg/client/clientset/versioned/typed/cmt/v1alpha1"
+	fakecmtv1alpha1 "github.com/openixia/cmt-controller/pkg/client/clientset/versioned/typed/cmt/v1alpha1/fake"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
 	"k8s.io/client-go/discovery"
 	fakediscovery "k8s.io/client-go/discovery/fake"
 	"k8s.io/client-go/testing"
-	clientset "keysight.io/cmt-controller/pkg/client/clientset/versioned"
-	cmtv1alpha1 "keysight.io/cmt-controller/pkg/client/clientset/versioned/typed/cmt/v1alpha1"
-	fakecmtv1alpha1 "keysight.io/cmt-controller/pkg/client/clientset/versioned/typed/cmt/v1alpha1/fake"
 )
 
 // NewSimpleClientset returns a clientset that will respond with the provided objects.
@@ -71,12 +71,12 @@ func (c *Clientset) Discovery() discovery.DiscoveryInterface {
 
 var _ clientset.Interface = &Clientset{}
 
-// CMTV1alpha1 retrieves the CMTV1alpha1Client
-func (c *Clientset) CMTV1alpha1() cmtv1alpha1.CMTV1alpha1Interface {
-	return &fakecmtv1alpha1.FakeCMTV1alpha1{Fake: &c.Fake}
+// CmtV1alpha1 retrieves the CmtV1alpha1Client
+func (c *Clientset) CmtV1alpha1() cmtv1alpha1.CmtV1alpha1Interface {
+	return &fakecmtv1alpha1.FakeCmtV1alpha1{Fake: &c.Fake}
 }
 
-// CMT retrieves the CMTV1alpha1Client
-func (c *Clientset) CMT() cmtv1alpha1.CMTV1alpha1Interface {
-	return &fakecmtv1alpha1.FakeCMTV1alpha1{Fake: &c.Fake}
+// Cmt retrieves the CmtV1alpha1Client
+func (c *Clientset) Cmt() cmtv1alpha1.CmtV1alpha1Interface {
+	return &fakecmtv1alpha1.FakeCmtV1alpha1{Fake: &c.Fake}
 }
