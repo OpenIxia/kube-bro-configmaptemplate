@@ -1,5 +1,5 @@
 {
-	"ImportPath": "github.com/openixia/cmt-controller",
+	"ImportPath": "github.com/openixia/kube-bro-configmaptemplate",
 	"GoVersion": "go1.9",
 	"GodepVersion": "v80",
 	"Packages": [

@@ -21,10 +21,10 @@ package v1alpha1
 import (
 	time "time"
 
-	cmt_v1alpha1 "github.com/openixia/cmt-controller/pkg/apis/cmt/v1alpha1"
-	versioned "github.com/openixia/cmt-controller/pkg/client/clientset/versioned"
-	internalinterfaces "github.com/openixia/cmt-controller/pkg/client/informers/externalversions/internalinterfaces"
-	v1alpha1 "github.com/openixia/cmt-controller/pkg/client/listers/cmt/v1alpha1"
+	cmt_v1alpha1 "github.com/openixia/kube-bro-configmaptemplate/pkg/apis/cmt/v1alpha1"
+	versioned "github.com/openixia/kube-bro-configmaptemplate/pkg/client/clientset/versioned"
+	internalinterfaces "github.com/openixia/kube-bro-configmaptemplate/pkg/client/informers/externalversions/internalinterfaces"
+	v1alpha1 "github.com/openixia/kube-bro-configmaptemplate/pkg/client/listers/cmt/v1alpha1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	watch "k8s.io/apimachinery/pkg/watch"

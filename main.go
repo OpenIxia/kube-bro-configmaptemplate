@@ -27,9 +27,9 @@ import (
 	// Uncomment the following line to load the gcp plugin (only required to authenticate against GKE clusters).
 	// _ "k8s.io/client-go/plugin/pkg/client/auth/gcp"
 
-	clientset "github.com/openixia/cmt-controller/pkg/client/clientset/versioned"
-	informers "github.com/openixia/cmt-controller/pkg/client/informers/externalversions"
-	"github.com/openixia/cmt-controller/pkg/signals"
+	clientset "github.com/openixia/kube-bro-configmaptemplate/pkg/client/clientset/versioned"
+	informers "github.com/openixia/kube-bro-configmaptemplate/pkg/client/informers/externalversions"
+	"github.com/openixia/kube-bro-configmaptemplate/pkg/signals"
 )
 
 var (
@@ -64,7 +64,7 @@ func main() {
 	controller := NewController(kubeClient, exampleClient,
 		kubeInformerFactory.Core().V1().ConfigMaps(),
 		kubeInformerFactory.Core().V1().Pods(),
-		exampleInformerFactory.CMT().V1alpha1().ConfigMapTemplates())
+		exampleInformerFactory.Cmt().V1alpha1().ConfigMapTemplates())
 
 	go kubeInformerFactory.Start(stopCh)
 	go exampleInformerFactory.Start(stopCh)

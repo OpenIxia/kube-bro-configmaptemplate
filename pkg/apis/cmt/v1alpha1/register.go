@@ -21,7 +21,7 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	cmt "github.com/openixia/cmt-controller/pkg/apis/cmt"
+	cmt "github.com/openixia/kube-bro-configmaptemplate/pkg/apis/cmt"
 )
 
 // SchemeGroupVersion is group version used to register these objects

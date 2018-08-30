@@ -40,11 +40,11 @@ import (
 	"k8s.io/client-go/tools/record"
 	"k8s.io/client-go/util/workqueue"
 
-	cmtv1alpha1 "github.com/openixia/cmt-controller/pkg/apis/cmt/v1alpha1"
-	clientset "github.com/openixia/cmt-controller/pkg/client/clientset/versioned"
-	cmtscheme "github.com/openixia/cmt-controller/pkg/client/clientset/versioned/scheme"
-	informers "github.com/openixia/cmt-controller/pkg/client/informers/externalversions/cmt/v1alpha1"
-	listers "github.com/openixia/cmt-controller/pkg/client/listers/cmt/v1alpha1"
+	cmtv1alpha1 "github.com/openixia/kube-bro-configmaptemplate/pkg/apis/cmt/v1alpha1"
+	clientset "github.com/openixia/kube-bro-configmaptemplate/pkg/client/clientset/versioned"
+	cmtscheme "github.com/openixia/kube-bro-configmaptemplate/pkg/client/clientset/versioned/scheme"
+	informers "github.com/openixia/kube-bro-configmaptemplate/pkg/client/informers/externalversions/cmt/v1alpha1"
+	listers "github.com/openixia/kube-bro-configmaptemplate/pkg/client/listers/cmt/v1alpha1"
 )
 
 const controllerAgentName = "cmt"

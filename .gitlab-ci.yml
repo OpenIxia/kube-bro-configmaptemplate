@@ -24,12 +24,12 @@ build image:
     - apk add --update alpine-sdk
     - echo $ARTIFACTORY_PASSWORD | docker login -u $ARTIFACTORY_USER --password-stdin ksnetservices-docker.jfrog.io
     - echo $(git describe) > version.txt
-    - docker build -t cmt-controller .
-    - docker tag cmt-controller ksnetservices-docker.jfrog.io/cmt-controller
-    - docker tag cmt-controller ksnetservices-docker.jfrog.io/cmt-controller:$(cat version.txt)
-    - docker push ksnetservices-docker.jfrog.io/cmt-controller:$(cat version.txt)
+    - docker build -t kube-bro-configmaptemplate .
+    - docker tag kube-bro-configmaptemplate ksnetservices-docker.jfrog.io/kube-bro-configmaptemplate
+    - docker tag kube-bro-configmaptemplate ksnetservices-docker.jfrog.io/kube-bro-configmaptemplate:$(cat version.txt)
+    - docker push ksnetservices-docker.jfrog.io/kube-bro-configmaptemplate:$(cat version.txt)
     # For non-dev builds, push to 'latest'
-    - if ! grep -- - version.txt > /dev/null; then docker push ksnetservices-docker.jfrog.io/cmt-controller; fi
+    - if ! grep -- - version.txt > /dev/null; then docker push ksnetservices-docker.jfrog.io/kube-bro-configmaptemplate; fi
   except:
     - pipelines
 
@@ -38,8 +38,8 @@ unit test:
   image: golang:alpine
   before_script:
     - mkdir -p /go/src/github.com/openixia
-    - ln -s $PWD /go/src/github.com/openixia/cmt-controller
-    - cd /go/src/github.com/openixia/cmt-controller
+    - ln -s $PWD /go/src/github.com/openixia/kube-bro-configmaptemplate
+    - cd /go/src/github.com/openixia/kube-bro-configmaptemplate
   script:
     - apk add --update git
     - go get -d -v ./...

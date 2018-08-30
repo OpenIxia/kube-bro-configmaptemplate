@@ -19,7 +19,7 @@ limitations under the License.
 package versioned
 
 import (
-	cmtv1alpha1 "github.com/openixia/cmt-controller/pkg/client/clientset/versioned/typed/cmt/v1alpha1"
+	cmtv1alpha1 "github.com/openixia/kube-bro-configmaptemplate/pkg/client/clientset/versioned/typed/cmt/v1alpha1"
 	discovery "k8s.io/client-go/discovery"
 	rest "k8s.io/client-go/rest"
 	flowcontrol "k8s.io/client-go/util/flowcontrol"

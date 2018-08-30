@@ -15,7 +15,7 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: cmt-controller
+  name: kube-bro-configmaptemplate
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -23,7 +23,7 @@ metadata:
   labels:
     app: configmap-template-controller
   name: cmt-config-watcher
-  namespace: cmt-controller
+  namespace: kube-bro-configmaptemplate
 rules:
 - apiGroups:
   - ""
@@ -70,7 +70,7 @@ metadata:
   labels:
     app: configmap-template-controller
   name: configmap-template-controller
-  namespace: cmt-controller
+  namespace: kube-bro-configmaptemplate
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -78,7 +78,7 @@ metadata:
   labels:
     app: configmap-template-controller
   name: cmt-config-watcher
-  namespace: cmt-controller
+  namespace: kube-bro-configmaptemplate
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -86,12 +86,12 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: configmap-template-controller
-  namespace: cmt-controller
+  namespace: kube-bro-configmaptemplate
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  namespace: cmt-controller
+  namespace: kube-bro-configmaptemplate
   name: configmap-template-controller
 spec:
   replicas: 1
@@ -105,7 +105,7 @@ spec:
     spec:
       containers:
         - name: controller
-          image: ixiacom/cmt-controller:0.2.1
+          image: ixiacom/kube-bro-configmaptemplate:0.2.1
           args:
             - "-stderrthreshold"
             - info

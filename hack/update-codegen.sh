@@ -26,7 +26,7 @@ CODEGEN_PKG=${CODEGEN_PKG:-$(cd ${SCRIPT_ROOT}; ls -d -1 ./vendor/k8s.io/code-ge
 #                  k8s.io/kubernetes. The output-base is needed for the generators to output into the vendor dir
 #                  instead of the $GOPATH directly. For normal projects this can be dropped.
 ${CODEGEN_PKG}/generate-groups.sh "deepcopy,client,informer,lister" \
-  github.com/openixia/cmt-controller/pkg/client github.com/openixia/cmt-controller/pkg/apis \
+  github.com/openixia/kube-bro-configmaptemplate/pkg/client github.com/openixia/kube-bro-configmaptemplate/pkg/apis \
   cmt:v1alpha1 \
   --output-base "$(dirname ${BASH_SOURCE})/../../../.." \
   --go-header-file ${SCRIPT_ROOT}/hack/custom-boilerplate.go.txt

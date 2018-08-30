@@ -19,9 +19,9 @@ limitations under the License.
 package fake
 
 import (
-	clientset "github.com/openixia/cmt-controller/pkg/client/clientset/versioned"
-	cmtv1alpha1 "github.com/openixia/cmt-controller/pkg/client/clientset/versioned/typed/cmt/v1alpha1"
-	fakecmtv1alpha1 "github.com/openixia/cmt-controller/pkg/client/clientset/versioned/typed/cmt/v1alpha1/fake"
+	clientset "github.com/openixia/kube-bro-configmaptemplate/pkg/client/clientset/versioned"
+	cmtv1alpha1 "github.com/openixia/kube-bro-configmaptemplate/pkg/client/clientset/versioned/typed/cmt/v1alpha1"
+	fakecmtv1alpha1 "github.com/openixia/kube-bro-configmaptemplate/pkg/client/clientset/versioned/typed/cmt/v1alpha1/fake"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
 	"k8s.io/client-go/discovery"

@@ -1,4 +1,4 @@
-# cmt-controller
+# kube-bro-configmaptemplate
 
 This repository implements a simple controller for watching ConfigMapTemplate
 resources as defined with a CustomResourceDefinition (CRD).

@@ -19,8 +19,8 @@ limitations under the License.
 package cmt
 
 import (
-	v1alpha1 "github.com/openixia/cmt-controller/pkg/client/informers/externalversions/cmt/v1alpha1"
-	internalinterfaces "github.com/openixia/cmt-controller/pkg/client/informers/externalversions/internalinterfaces"
+	v1alpha1 "github.com/openixia/kube-bro-configmaptemplate/pkg/client/informers/externalversions/cmt/v1alpha1"
+	internalinterfaces "github.com/openixia/kube-bro-configmaptemplate/pkg/client/informers/externalversions/internalinterfaces"
 )
 
 // Interface provides access to each of this group's versions.
